@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { CssBaseline } from '@mui/material';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import Footer from 'components/Footer';
+import Header from 'components/Header';
+import NotFound from 'components/NotFound';
+import { LoaderProvider } from 'context/Loader';
+import AsteroidsFavorites from 'pages/asteroidsFavorites';
+import AsteroidsList from 'pages/asteroidsList';
+import Main from 'pages/main';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 
 function App() {
+  const defaultTheme = createTheme();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ThemeProvider theme={defaultTheme}>
+        <CssBaseline />
+        <LoaderProvider>
+          <Routes>
+            <Route element={<Header />}>
+              <Route path="/" element={<Main />} />
+              <Route path="/asteroids" element={<AsteroidsList />} />
+              <Route path="/favorites" element={<AsteroidsFavorites />} />
+              <Route path="*" element={<NotFound />} />
+            </Route>
+          </Routes>
+          <Footer />
+        </LoaderProvider>
+      </ThemeProvider>
     </div>
   );
 }
