@@ -1,0 +1,6 @@
+### List of the last asteroids:
+GET https://api.nasa.gov/neo/rest/v1/feed?api_key=DEMO_KEY
+### List of asteroids by date:
+GET https://api.nasa.gov/neo/rest/v1/feed?api_key=DEMO_KEY&start_date=2015-9-7&end_date=2015-9-8
+### info about an asteroid
+GET https://api.nasa.gov/neo/rest/v1/neo/2277570?api_key=DEMO_KEY

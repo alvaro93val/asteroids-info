@@ -1,0 +1,15 @@
+@host = localhost
+@port = 3000
+
+### version
+GET http://{{host}}:{{port}}/version
+### List of the last asteroids:
+GET http://{{host}}:{{port}}/asteroid/last
+### List of asteroids by date:
+GET http://{{host}}:{{port}}/asteroid/date?startDate=2015-9-7&endDate=2015-9-8
+### Info about an asteroid
+GET http://{{host}}:{{port}}/asteroid/info?id=2277570&date=2023-6-6
+
+### BAD REQUEST
+### Info about an asteroid
+GET http://{{host}}:{{port}}/asteroid/info?id=2277570&date=2023-6-5
