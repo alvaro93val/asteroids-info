@@ -3,17 +3,24 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "keywords": [],
+  "author": "Álvaro Valverde Aparicio",
+  "license": "ISC",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "linter": "eslint ./**/*.ts --fix",
     "prettier": "prettier ./**/*.ts --write",
     "build": "tsc",
     "start": "node build/src",
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "prepare": "husky install"
   },
-  "keywords": [],
-  "author": "Álvaro Valverde Aparicio",
-  "license": "ISC",
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
   "dependencies": {
     "axios": "^1.4.0",
     "cors": "^2.8.5",
