@@ -95,11 +95,17 @@ function round(number: string | undefined): string {
  * @returns {AsteroidByDate[]} asteroids sorted
  */
 function getAsteroidsSorted(asteroidsByDate: AsteroidByDate[]): AsteroidByDate[] {
-  return asteroidsByDate.sort((a, b) =>
+  const asteroidsSortDate = asteroidsByDate.sort((a, b) =>
     new Date(a.date).getTime() < new Date(b.date).getTime()
       ? -1
       : new Date(a.date).getTime() > new Date(b.date).getTime()
       ? 1
       : 0
   );
+  return asteroidsSortDate.map((a) => {
+    return {
+      date: a.date,
+      asteroids: a.asteroids.sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0))
+    };
+  });
 }

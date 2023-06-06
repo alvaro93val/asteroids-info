@@ -17,8 +17,8 @@ const Main = () => {
 
   return (
     <Page>
-      <Grid container direction="row" justifyContent="center" alignItems="center" spacing={3}>
-        <Grid item xs={6}>
+      <Grid container direction="row" justifyContent="center" alignItems="center" spacing={4}>
+        <Grid item xs={4}>
           <CardMain
             title="Asteroids List"
             subtitle="Shows a list of asteroids defined by dates. If no date is set, this week's
@@ -27,7 +27,7 @@ const Main = () => {
             path="/asteroids"
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           <CardMain
             title="Favorite Asteroids"
             subtitle="Manage favorite asteroids. Save a list of asteroids."

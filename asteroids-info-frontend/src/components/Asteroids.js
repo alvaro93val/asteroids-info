@@ -94,6 +94,8 @@ const Asteroids = (props) => {
           handleClose={handleClosePopup}
           asteroid={asteroid}
           isFavorite={isFavorite(asteroid.id, asteroid.date)}
+          setErrorMessage={props.setErrorMessage}
+          setOpenSnackbar={props.setOpenSnackbar}
         />
       ) : (
         <></>
@@ -101,7 +103,7 @@ const Asteroids = (props) => {
       <Snackbar
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         open={props.openSnackbar}
-        autoHideDuration={6000}
+        autoHideDuration={10000}
         onClose={handleCloseSnackbar}
       >
         <Alert onClose={handleCloseSnackbar} severity="error" sx={{ width: '100%' }}>

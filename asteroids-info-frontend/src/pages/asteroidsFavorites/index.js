@@ -1,9 +1,8 @@
 import { Typography } from '@mui/material';
 import Asteroids from 'components/Asteroids';
 import Page from 'components/Page';
-import React, { useContext, useEffect, useState } from 'react';
-
 import LoaderContext from 'context/Loader';
+import React, { useContext, useEffect, useState } from 'react';
 
 const AsteroidsFavorites = () => {
   const [asteroids, setAsteroids] = useState([]);
@@ -25,7 +24,7 @@ const AsteroidsFavorites = () => {
 
   return (
     <Page>
-      <Typography component="h1" variant="h2" align="center" color="text.primary" gutterBottom>
+      <Typography component="h3" variant="h3" align="center" color="text.primary" gutterBottom>
         ASTEROIDS FAVORITES
       </Typography>
       <Asteroids

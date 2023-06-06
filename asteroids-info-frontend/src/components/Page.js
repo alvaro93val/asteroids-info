@@ -11,7 +11,7 @@ const Page = ({ children }) => {
           pb: 6
         }}
       >
-        <Container maxWidth="sm">{children}</Container>
+        <Container maxWidth="md">{children}</Container>
       </Box>
     </main>
   );

@@ -14,6 +14,7 @@ import LoaderContext from 'context/Loader';
 import asteroidImage from 'images/asteroids3.jpg';
 import React, { useContext, useEffect, useState } from 'react';
 import services from 'services/services';
+import asteroidsSort from 'utils/functions';
 
 const AsteroidInfo = (props) => {
   const [asteroid, setAsteroid] = useState();
@@ -62,16 +63,23 @@ const AsteroidInfo = (props) => {
         setFavorite(true);
       }
 
-      localStorage.setItem('asteroids', JSON.stringify(asteroidsFavorites));
+      localStorage.setItem('asteroids', JSON.stringify(asteroidsSort(asteroidsFavorites)));
     }
   };
 
   useEffect(() => {
     if (props.asteroid) {
-      services.getAsteroidInfo(props.asteroid.id, props.asteroid.date).then((data) => {
-        setAsteroid(data.asteroidInfo);
-        setShowLoader(false);
-      });
+      services
+        .getAsteroidInfo(props.asteroid.id, props.asteroid.date)
+        .then((data) => {
+          setAsteroid(data.asteroidInfo);
+          setShowLoader(false);
+        })
+        .catch((error) => {
+          props.setErrorMessage(error.response?.data?.message ?? error.message);
+          setShowLoader(false);
+          props.setOpenSnackbar(true);
+        });
     }
     return () => {
       setAsteroid(undefined);
