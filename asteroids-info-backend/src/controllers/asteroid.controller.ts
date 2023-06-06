@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import logger from '../logger';
-import { getAsteroidInfo, getAsteroidsListByDate } from '../manager/asteroid.manager';
+// import { getAsteroidInfo, getAsteroidsListByDate } from '../manager/asteroid.manager';
+import asteroidInfo from '../../data/sample-asteroid-info.json';
+import asteroidsListByDate from '../../data/sample-asteroids-list.json';
 import { CodesResponses } from '../resources/enums/codesResponses.enum';
 
 /** Function that controls the body that receives checking that data arrives
@@ -11,7 +13,7 @@ import { CodesResponses } from '../resources/enums/codesResponses.enum';
  */
 export async function getLastAsteroids(_request: Request, response: Response): Promise<Response> {
   try {
-    const asteroidsListByDate = await getAsteroidsListByDate();
+    // const asteroidsListByDate = await getAsteroidsListByDate();
 
     // if all goes well return 200
     return response
@@ -19,8 +21,12 @@ export async function getLastAsteroids(_request: Request, response: Response): P
       .json({ success: true, message: 'OK', asteroidsListByDate: asteroidsListByDate });
   } catch (error) {
     logger.error(error.message);
-    // if there is an error return a 400
-    return response.status(CodesResponses.BAD_REQUEST).json({
+    let code = CodesResponses.BAD_REQUEST;
+    if (error.message.toString().includes('status code')) {
+      code = parseInt(error.message.slice(-3));
+    }
+
+    return response.status(code).json({
       success: false,
       message: error.message
     });
@@ -41,7 +47,7 @@ export async function getAsteroidsByDate(request: Request, response: Response): 
     if (!startDate) throw new Error('Error start date');
     if (!endDate) throw new Error('Error end date');
 
-    const asteroidsListByDate = await getAsteroidsListByDate(<string>startDate, <string>endDate);
+    // const asteroidsListByDate = await getAsteroidsListByDate(<string>startDate, <string>endDate);
 
     // if all goes well return 200
     return response
@@ -49,8 +55,12 @@ export async function getAsteroidsByDate(request: Request, response: Response): 
       .json({ success: true, message: 'OK', asteroidsListByDate: asteroidsListByDate });
   } catch (error) {
     logger.error(error.message);
-    // if there is an error return a 400
-    return response.status(CodesResponses.BAD_REQUEST).json({
+    let code = CodesResponses.BAD_REQUEST;
+    if (error.message.toString().includes('status code')) {
+      code = parseInt(error.message.slice(-3));
+    }
+
+    return response.status(code).json({
       success: false,
       message: error.message
     });
@@ -71,14 +81,18 @@ export async function getOneAsteroidInfo(request: Request, response: Response): 
     if (!id) throw new Error('Error asteroid ID');
     if (!date) throw new Error('Error date');
 
-    const asteroidInfo = await getAsteroidInfo(<string>id, <string>date);
+    // const asteroidInfo = await getAsteroidInfo(<string>id, <string>date);
 
     // if all goes well return 200
     return response.status(CodesResponses.OK).json({ success: true, message: 'OK', asteroidInfo: asteroidInfo });
   } catch (error) {
     logger.error(error.message);
-    // if there is an error return a 400
-    return response.status(CodesResponses.BAD_REQUEST).json({
+    let code = CodesResponses.BAD_REQUEST;
+    if (error.message.toString().includes('status code')) {
+      code = parseInt(error.message.slice(-3));
+    }
+
+    return response.status(code).json({
       success: false,
       message: error.message
     });

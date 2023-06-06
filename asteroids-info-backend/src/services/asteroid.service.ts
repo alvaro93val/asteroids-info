@@ -14,10 +14,10 @@ export async function getAsteroidsListService(startDate?: string, endDate?: stri
 
   await axios
     .get(url)
-    .then(function (response) {
+    .then((response) => {
       asteroids = response.data;
     })
-    .catch(function (error) {
+    .catch((error) => {
       throw error;
     });
 
@@ -36,10 +36,10 @@ export async function getAsteroidInfoService(asteroidId: string): Promise<NearEa
 
   await axios
     .get(url)
-    .then(function (response) {
+    .then((response) => {
       asteroid = response.data;
     })
-    .catch(function (error) {
+    .catch((error) => {
       throw error;
     });
 

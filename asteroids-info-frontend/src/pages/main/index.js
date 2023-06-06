@@ -1,11 +1,20 @@
 import { Grid } from '@mui/material';
 import CardMain from 'components/CardMain';
 import Page from 'components/Page';
+import LoaderContext from 'context/Loader';
 import asteroidsList from 'images/asteroids1.jpg';
 import asteroidsFavorite from 'images/asteroids2.jpg';
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 
 const Main = () => {
+  const { setShowLoader } = useContext(LoaderContext);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowLoader(false);
+    }, 500);
+  }, []);
+
   return (
     <Page>
       <Grid container direction="row" justifyContent="center" alignItems="center" spacing={3}>

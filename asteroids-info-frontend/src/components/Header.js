@@ -1,15 +1,16 @@
 // @ts-nocheck
 import MenuIcon from '@mui/icons-material/Menu';
 import { Button, IconButton, Toolbar, Typography } from '@mui/material';
-import React from 'react';
+import LoaderContext from 'context/Loader';
+import React, { useContext, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import AppBar from './AppBar';
+import BackdropProgress from './BackdropProgress';
 import LateralMenu from './LateralMenu';
 
 const Header = () => {
-  const [openDrawer, setOpenDrawer] = React.useState(false);
-  const handleDrawerOpen = () => setOpenDrawer(true);
-  const handleDrawerClose = () => setOpenDrawer(false);
+  const [openDrawer, setOpenDrawer] = useState(false);
+  const { showLoader, setShowLoader } = useContext(LoaderContext);
 
   return (
     <div>
@@ -21,7 +22,7 @@ const Header = () => {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
-            onClick={handleDrawerOpen}
+            onClick={() => setOpenDrawer(true)}
           >
             <MenuIcon />
           </IconButton>
@@ -32,7 +33,8 @@ const Header = () => {
           </Button>
         </Toolbar>
       </AppBar>
-      <LateralMenu open={openDrawer} handleClose={handleDrawerClose} />
+      <LateralMenu open={openDrawer} handleClose={() => setOpenDrawer(false)} />
+      <BackdropProgress open={showLoader} handleClose={() => setShowLoader(false)} />
       <Outlet />
     </div>
   );

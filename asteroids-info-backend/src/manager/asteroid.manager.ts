@@ -46,17 +46,17 @@ export async function getAsteroidInfo(asteroidId: string, date: string): Promise
 
   const asteroid: AsteroidInfo = {
     id: neo.id,
-    name: neo.id,
+    name: neo.name,
     magnitude: neo.absolute_magnitude_h + ' H',
     diameter:
-      neo.estimated_diameter.kilometers.estimated_diameter_min +
+      neo.estimated_diameter.meters.estimated_diameter_min.toFixed() +
       '-' +
-      neo.estimated_diameter.kilometers.estimated_diameter_max +
-      'km',
+      neo.estimated_diameter.meters.estimated_diameter_max.toFixed() +
+      ' m',
     hazardous: neo.is_potentially_hazardous_asteroid,
     date: closeApproachDate,
-    velocity: round(closeApproachDatum.relative_velocity.kilometers_per_hour) + '/h',
-    distance: round(closeApproachDatum.miss_distance.kilometers)
+    velocity: round(closeApproachDatum.relative_velocity.kilometers_per_hour) + ' km/h',
+    distance: round(closeApproachDatum.miss_distance.kilometers) + ' km'
   };
 
   return asteroid;
@@ -86,7 +86,7 @@ function dateFormat(date?: string): string | undefined {
 function round(number: string | undefined): string {
   if (!number || isNaN(parseInt(number))) return 'Unknown';
 
-  return parseInt(number) + ' km';
+  return parseInt(number).toString();
 }
 
 /**

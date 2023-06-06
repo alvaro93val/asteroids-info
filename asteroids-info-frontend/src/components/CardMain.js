@@ -4,10 +4,10 @@ import React from 'react';
 const CardMain = (props) => {
   return (
     <Button href={props.path}>
-      <Card sx={{ width: '250px', height: '275px' }}>
+      <Card style={{ width: '250px' }}>
         <CardActionArea>
           <CardMedia component="img" height="140" image={props.image} alt={props.title} />
-          <CardContent>
+          <CardContent style={{ height: '135px' }}>
             <Typography gutterBottom variant="h5" component="div">
               {props.title}
             </Typography>
